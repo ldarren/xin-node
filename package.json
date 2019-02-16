@@ -1,0 +1,24 @@
+{
+  "name": "xin-node",
+  "version": "0.0.1",
+  "description": "xin api service",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.395.0",
+    "emailjs-mime-parser": "^2.0.5",
+    "picos": "^0.6.3",
+    "text-encoding": "^0.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "picos -p cfg/xin.dev.json",
+    "test": "test/index.js"
+  },
+  "keywords": [
+    "xin",
+    "ses",
+    "email"
+  ],
+  "author": "Darren Liew",
+  "license": "MIT"
+}

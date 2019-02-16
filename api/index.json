@@ -1,0 +1,29 @@
+{                                                                                                                                                                                                           
+    "deps":{
+		"util": "./util",
+		"s3": "./s3",
+        "web": ["context", "webServer"]
+    },
+    "routes":{
+        "ERR/#msg":[
+            []
+        ],
+        "END/#msg":[
+            []
+        ],
+		"/s3/list":[
+			["s3", "list", "emails"],
+			["util", "output", "emails"],
+			[]
+		],
+		"/s3/read/:key":[
+			["s3", "read", "email"],
+			["util", "output", "email"],
+			[]
+		],
+        "/say/hello":[
+            ["util", "sayNow"],
+			[]
+        ]
+    }
+}
