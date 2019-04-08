@@ -1,18 +1,21 @@
 {
   "name": "xin-node",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.395.0",
     "emailjs-mime-parser": "^2.0.5",
+    "pem-jwk": "^2.0.0",
+    "pico-jwt": "^0.2.3",
     "picos": "^0.6.3",
+    "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git",
     "text-encoding": "^0.7.0"
   },
   "devDependencies": {},
   "scripts": {
     "start": "picos -p cfg/xin.dev.json",
-    "test": "test/index.js"
+    "test": "DEBUG=1 node test/index.js"
   },
   "keywords": [
     "xin",

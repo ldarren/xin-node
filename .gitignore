@@ -1,4 +1,6 @@
 .DS_Store
+cfg/jwks.*.json
+test/jwts.json
 
 # Logs
 logs
