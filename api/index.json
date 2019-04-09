@@ -1,8 +1,9 @@
-{                                                                                                                                                                                                           
+{ 
     "deps":{
 		"util": "./util",
+		"ums": "./ums",
 		"s3": "./s3",
-        "web": ["context", "webServer"]
+		"web": ["context", "webServer"]
     },
     "routes":{
         "ERR/#msg":[

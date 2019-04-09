@@ -15,7 +15,9 @@
   "devDependencies": {},
   "scripts": {
     "start": "picos -p cfg/xin.dev.json",
-    "test": "DEBUG=1 node test/index.js"
+    "test": "DEBUG=1 node test/index.js",
+	"lint": "eslint .",
+	"lint:fix": "eslint . --fix"
   },
   "keywords": [
     "xin",

@@ -7,7 +7,8 @@
         ],
 		"models": [
 			"models/index.js"
-		]
+		],
+		"jwks": "jwks.jasa.json"
     },
     "mods":{
         "webServer":{

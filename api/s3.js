@@ -1,7 +1,7 @@
 // Load the SDK for JavaScript
 const AWS = require('aws-sdk')
 // Create S3 service object
-const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+const s3 = new AWS.S3({apiVersion: '2006-03-01'})
 
 /*
 const mime = require('emailjs-mime-parser')
