@@ -2,14 +2,9 @@
     "app":{
 		"signalTTL": 60000,
 		"master": true,
-        "apis": [
-            "api/index.json"
-        ],
-		"models": [
-			"models/index.js"
-		],
 		"jwks": "jwks.jasa.json"
     },
+	"deps": ["xin.json"],
     "mods":{
         "webServer":{
             "mod":"web",

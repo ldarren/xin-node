@@ -2,6 +2,7 @@
     "deps":{
 		"util": "./util",
 		"ums": "./ums",
+		"config": "./config",
 		"s3": "./s3",
 		"web": ["context", "webServer"]
     },
@@ -20,6 +21,22 @@
 		"/s3/read/:key":[
 			["s3", "read", "email"],
 			["util", "output", "email"],
+			[]
+		],
+		"/config/mailbox/create": [
+			["web", "getBody", "req", "body"],
+			["config", "save", "body"],
+			[]
+		],
+		"/config/mailbox/list": [
+			["config", "list"],
+			[]
+		],
+		"/config/mailbox": [
+			["util", "branch", "req", [{
+				"POST": "config/mailbox/create",
+				"GET": "config/mailbox/list"
+			}]],
 			[]
 		],
         "/say/hello":[

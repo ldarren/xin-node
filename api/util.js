@@ -11,6 +11,12 @@ module.exports = {
 		default: return next(null, this.sigslot.abort())
 		}
 	},
+	branch(req, routes, next){
+	console.log('>>>', routes)
+		const route = routes[req.method]
+		if (!route) next(this.error(404, `${req.method} ${this.api} is not valid`))
+		next(null, route)
+	},
 	help(next){
 		next(this.error(404, `api ${this.api} is not supported yet`))
 	},

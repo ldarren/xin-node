@@ -9,15 +9,15 @@
     "pem-jwk": "^2.0.0",
     "pico-jwt": "^0.2.3",
     "picos": "^0.6.3",
-    "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git",
+    "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git#feature/transposer",
     "text-encoding": "^0.7.0"
   },
   "devDependencies": {},
   "scripts": {
     "start": "picos -p cfg/xin.dev.json",
     "test": "DEBUG=1 node test/index.js",
-	"lint": "eslint .",
-	"lint:fix": "eslint . --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [
     "xin",
