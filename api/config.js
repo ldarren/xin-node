@@ -10,8 +10,11 @@ module.exports = {
 	save(body, next){
 		const name = body.name
 		if (!name) return next('missing name')
-		group().insert(['name', 'region', 'Bucket', 'IdentityPoolId', 'UserPoolId', 'ClientId']).values([body])
-		return next()
+		group().insert(['name', 'env']).values([name, JSON.stringify(body)]).exec((err, ret) => {
+			if (err) return next(err)
+			this.setOutput({id: ret.insertId})
+			return next()
+		})
 	},
 	list(output, next){
 		group().select().exec((err, res) => {

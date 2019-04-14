@@ -34,7 +34,6 @@
 				"ClientId": {"type": "string", "required": "true"}
 			}], "body"],
 			["config", "save", "body"],
-			["util", "output", {"ret": "ok"}],
 			[]
 		],
 		"config/mailbox/list": [

@@ -13,7 +13,7 @@ function validate(spec, body){
 
 		switch(s.type || s){
 		case 'string':
-			return !!val.chatAt
+			return !val.charAt
 		case 'number':
 			return (isNaN(parseFloat(val)) || !isFinite(val))
 		case 'boolean':
@@ -21,7 +21,7 @@ function validate(spec, body){
 		case 'object':
 			if (!(val instanceof Object) || Array.isArray(val)) return true
 			if (!s.spec) return false
-			return validate(s.sepc, val)
+			return validate(s.spec, val)
 		case 'array':
 			if (!(val instanceof Object) || !Array.isArray(val)) return true
 			if (!s.spec) return false
