@@ -8,6 +8,8 @@ module.exports = {
 		return cb()
 	},
 	save(body, next){
+		const name = body.name
+		if (!name) return next('missing name')
 		group().insert(['name', 'region', 'Bucket', 'IdentityPoolId', 'UserPoolId', 'ClientId']).values([body])
 		return next()
 	},

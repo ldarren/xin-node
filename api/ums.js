@@ -13,7 +13,8 @@ function createJWTs(jwks){
 
 module.exports = {
 	setup(ctx, cb){
-		const jwks = require(path.join(ctx.config.app.configPath, ctx.config.app.jwks))
+		const appCfg = ctx.config.app
+		const jwks = require(path.join(appCfg.configPath, appCfg.jwks))
 		jwts = createJWTs(jwks)
 		cb()
 	},

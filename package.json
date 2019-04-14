@@ -1,14 +1,14 @@
 {
   "name": "xin-node",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.395.0",
-    "emailjs-mime-parser": "^2.0.5",
+    "aws-sdk": "^2.437.0",
+    "emailjs-mime-parser": "^2.0.7",
     "pem-jwk": "^2.0.0",
     "pico-jwt": "^0.2.3",
-    "picos": "^0.6.3",
+    "picos": "^0.7.0",
     "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git#feature/transposer",
     "text-encoding": "^0.7.0"
   },

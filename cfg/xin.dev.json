@@ -1,17 +1,6 @@
 {
     "app":{
-		"signalTTL": 60000,
-		"master": true,
 		"jwks": "jwks.jasa.json"
     },
-	"deps": ["xin.json"],
-    "mods":{
-        "webServer":{
-            "mod":"web",
-            "allowOrigin":"*",
-            "sep":["&"],
-            "uploadWL":[],
-            "port":8888
-        }
-    }
+	"deps": ["xin.json"]
 }

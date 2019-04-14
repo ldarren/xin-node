@@ -23,21 +23,29 @@
 			["util", "output", "email"],
 			[]
 		],
-		"/config/mailbox/create": [
+		"config/mailbox/create": [
 			["web", "getBody", "req", "body"],
+			["util", ["validate", {
+				"name": {"type": "string", "required": "true"},
+				"region": {"type": "string", "required": "true"},
+				"Bucket": {"type": "string", "required": "true"},
+				"IdentityPoolId": {"type": "string", "required": "true"},
+				"UserPoolId": {"type": "string", "required": "true"},
+				"ClientId": {"type": "string", "required": "true"}
+			}], "body"],
 			["config", "save", "body"],
+			["util", "output", {"ret": "ok"}],
 			[]
 		],
-		"/config/mailbox/list": [
+		"config/mailbox/list": [
 			["config", "list"],
 			[]
 		],
 		"/config/mailbox": [
-			["util", "branch", "req", [{
+			["util", "branch", "req", {
 				"POST": "config/mailbox/create",
 				"GET": "config/mailbox/list"
-			}]],
-			[]
+			}]
 		],
         "/say/hello":[
             ["util", "sayNow"],
