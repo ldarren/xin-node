@@ -37,7 +37,8 @@
 			[]
 		],
 		"config/mailbox/list": [
-			["config", "list"],
+			["config", "list", ":output"],
+			["util", "output", ":output"],
 			[]
 		],
 		"/config/mailbox": [
