@@ -1,3 +1,5 @@
 module.exports = [
-	require('./s3.js')
+	require('./s3'),
+	require('./user'),
+	require('./group')
 ]

@@ -1,4 +1,5 @@
 module.exports = {
-	setup(app, lib){
+	setup(app, cb){
+		cb()
 	}
 }

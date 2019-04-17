@@ -38,7 +38,8 @@ INSERT INTO `hash` (v) VALUES
 ('email'),
 ('phone'),
 ('name'),
-('env');
+('env'),
+('perm');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user`(
@@ -91,6 +92,9 @@ CREATE TABLE IF NOT EXISTS `group_map` (
 	`uat` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY(`host_id`, `k`)
 ) ENGINE=INNODB;
+
+INSERT INTO `group` (name) VALUES ('xin');
+INSERT INTO `group_map` 
 /*
 CREATE TABLE IF NOT EXISTS group_list (
     id INT UNSIGNED AUTO_INCREMENT,
