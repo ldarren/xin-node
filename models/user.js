@@ -3,7 +3,7 @@ let user
 module.exports = {
 	setup(ctx, cb){
 		const storage = ctx.storage
-		user = ctx.storage.t('user', storage.hash(), ['username', 'state'])
+		user = ctx.storage.t('user', storage.hash(), ['username', 'client_id', 'state', 'cby', 'uby', 'cat', 'uat'])
 		user().ready.on(err => {
 			if (err) return cb(err)
 			console.log('user table connected')
@@ -16,7 +16,7 @@ module.exports = {
 			.values([username, email, phone])
 			.exec(cb)
 	},
-	get(username, cb, state = 1){
+	get(username, client_id, cb, state = 1){
 		user().where({username, state}).exec(cb)
 	},
 }

@@ -4,10 +4,10 @@ module.exports = {
 	setup(ctx, cb){
 		return cb()
 	},
-	save(body, next){
+	save(user, body, next){
 		const name = body.name
 		if (!name) return next('missing name')
-		group.save(name, body, [0, 1], (err, ret) => {
+		group.save(name, user.id, body, [0, 1], (err, ret) => {
 			if (err) return next(err)
 			this.setOutput({id: ret.insertId})
 			return next()

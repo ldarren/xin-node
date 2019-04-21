@@ -23,6 +23,12 @@
 			["util", "output", "email"],
 			[]
 		],
+		"ums/create": [
+			["ums", "verify", "jwt"],
+			["web", "getBody", "req", "body"],
+			["ums", "setUser", "jwt", "body"],
+			[]
+		],
 		"config/mailbox/create": [
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
@@ -33,15 +39,17 @@
 				"UserPoolId": {"type": "string", "required": "true"},
 				"ClientId": {"type": "string", "required": "true"}
 			}], "body"],
-			["config", "save", "body"],
+			["config", "save", "user", "body"],
 			[]
 		],
 		"config/mailbox/list": [
-			["config", "list", ":output"],
+			["config", "list", "user", ":output"],
 			["util", "output", ":output"],
 			[]
 		],
 		"/config/mailbox": [
+			["ums", "verify", "jwt"],
+			["ums", "getUser", "jwt", "user"],
 			["util", "branch", "req", {
 				"POST": "config/mailbox/create",
 				"GET": "config/mailbox/list"
