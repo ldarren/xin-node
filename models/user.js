@@ -3,20 +3,21 @@ let user
 module.exports = {
 	setup(ctx, cb){
 		const storage = ctx.storage
-		user = ctx.storage.t('user', storage.hash(), ['username', 'client_id', 'state', 'cby', 'uby', 'cat', 'uat'])
+		user = ctx.storage.t('user', storage.hash(), ['username', 'state'])
 		user().ready.on(err => {
 			if (err) return cb(err)
 			console.log('user table connected')
 			cb()
 		})
 	},
-	save(username, email, phone, cb){
+	set(obj, cb){
+		const input = Object.assign({}, obj, { state: 1 })
 		user()
-			.insert(['username', 'email', 'phone'])
-			.values([username, email, phone])
+			.insert(['username', 'state', 'email', 'phone'])
+			.values([input])
 			.exec(cb)
 	},
-	get(username, client_id, cb, state = 1){
+	get(username, cb, state = 1){
 		user().where({username, state}).exec(cb)
 	},
 }

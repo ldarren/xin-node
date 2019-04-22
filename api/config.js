@@ -4,19 +4,27 @@ module.exports = {
 	setup(ctx, cb){
 		return cb()
 	},
-	save(user, body, next){
+	set(user, body, next){
 		const name = body.name
 		if (!name) return next('missing name')
-		group.save(name, user.id, body, [0, 1], (err, ret) => {
+		group.set(name, user.id, body, [0, 1], (err, ret) => {
 			if (err) return next(err)
 			this.setOutput({id: ret.insertId})
 			return next()
 		})
 	},
-	list(user, output, next){
-		group.list(user.id, (err, res) => {
+	get(grp, next){
+		group.get(grp.name, (err, ret) => {
 			if (err) return next(err)
-			output.push(...res)
+			if (!ret || !ret.length) return next('not found')
+			Object.assign(grp, ret[0])
+			return next()
+		})
+	},
+	list(user, output, next){
+		group.list(user.id, (err, ret) => {
+			if (err) return next(err)
+			output.push(...ret)
 			return next()
 		})
 	}

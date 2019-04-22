@@ -23,10 +23,11 @@
 			["util", "output", "email"],
 			[]
 		],
-		"ums/create": [
-			["ums", "verify", "jwt"],
+		"/user/create": [
+			["ums", "verify", "req", "jwt"],
 			["web", "getBody", "req", "body"],
-			["ums", "setUser", "jwt", "body"],
+			["ums", "setUser", "jwt", "body", "output"],
+			["util", "output", "output"],
 			[]
 		],
 		"config/mailbox/create": [
@@ -39,7 +40,7 @@
 				"UserPoolId": {"type": "string", "required": "true"},
 				"ClientId": {"type": "string", "required": "true"}
 			}], "body"],
-			["config", "save", "user", "body"],
+			["config", "set", "user", "body"],
 			[]
 		],
 		"config/mailbox/list": [
@@ -48,12 +49,21 @@
 			[]
 		],
 		"/config/mailbox": [
-			["ums", "verify", "jwt"],
+			["ums", "verify", "req", "jwt"],
 			["ums", "getUser", "jwt", "user"],
 			["util", "branch", "req", {
 				"POST": "config/mailbox/create",
 				"GET": "config/mailbox/list"
 			}]
+		],
+		"/config/mailbox/:name": [
+			["util", "extractParams", "group"],
+			["util", ["validate", {
+				"name": {"type": "string", "required": true}
+			}], "group"],
+			["config", "get", "group"],
+			["util", "output", "group"],
+			[]
 		],
         "/say/hello":[
             ["util", "sayNow"],

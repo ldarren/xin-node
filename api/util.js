@@ -1,35 +1,4 @@
-const BOOLS = [true, false, 1, 0]
-
-function validate(spec, body){
-	return Object.keys(spec).find(k => {
-		const s = spec[k]
-		const required = !!s.required
-		const val = body[k]
-
-		if (!val){
-			if (required) return true
-			return false
-		}
-
-		switch(s.type || s){
-		case 'string':
-			return !val.charAt
-		case 'number':
-			return (isNaN(parseFloat(val)) || !isFinite(val))
-		case 'boolean':
-			return !BOOLS.includes(val)
-		case 'object':
-			if (!(val instanceof Object) || Array.isArray(val)) return true
-			if (!s.spec) return false
-			return validate(s.spec, val)
-		case 'array':
-			if (!(val instanceof Object) || !Array.isArray(val)) return true
-			if (!s.spec) return false
-			return val.find(i => validate(s.spec, i))
-		default: return true
-		}
-	})
-}
+const pObj = require('pico-common').export('pico/obj')
 
 module.exports = {
 	setup(ctx, cb){
@@ -51,10 +20,18 @@ module.exports = {
 	},
 	validate(spec){
 		return (body, next) => {
-			const found = validate(spec, body)
+			const found = pObj.validate(spec, body)
 			if (!found) return next()
 			return next(`invalid params [${found}]`)
 		}
+	},
+	output(body, next){
+		this.setOutput(body)
+		return next()
+	},
+	extractParams(output, next){
+		Object.assign(output, this.params)	
+		return next()
 	},
 	help(next){
 		next(this.error(404, `api ${this.api} is not supported yet`))
@@ -65,10 +42,5 @@ module.exports = {
 	sayNow(next){
 		console.log(Date.now())
 		next()
-	},
-	output(body, next){
-		console.log('###', body)
-		this.setOutput(body)
-		return next()
 	}
 }

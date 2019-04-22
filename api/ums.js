@@ -31,34 +31,31 @@ module.exports = {
 		cb()
 	},
 	verify(req, output, next){
-		let token = req.headers["Authorization"]
-		if (!token || !token.length) return next({code: 403})
-		token = token.substr('bearer '.length)
+		let token = req.headers['authorization']
+		if (!token || !token.length) return next({status: 403, code: 0})
+		token = token.substr('Bearer '.length)
 
 		const payload = getTokenPayload(token)
-		if (!payload) return next({code: 403})
-
-		if (config.client_id !== payload.client_id) return next({code: 403})
+		if (!payload) return next({status: 403, code: 1})
 
 		Object.assign(output, payload)
 
 		return next()
 	},
 	setUser(jwt, body, output, next){
-		model.get(jwt.username, jwt.client_id, (err, ret) => {
+		model.get(jwt.username, (err, ret) => {
 			if (err) return next(err)
-			if (ret) {
-				Object.assign(output, ret)
+			if (ret, ret.length) {
+				Object.assign(output, ret[0])
 				return next()
 			}
 
 			const payload = getTokenPayload(body.token)
-			if (!payload) return next({code: 403})
-			if (payload['cognito:username'] === jwt.username) return next({code: 403})
+			if (!payload) return next({status: 400, code: 0})
+			if (payload['cognito:username'] !== jwt.username) return next({status: 400, code: 1})
 
 			const user = {
 				username: jwt.username,
-				client_id: jwt.client_id,
 				email: payload.email,
 				email_state: payload.email_verified ? 1 : 0,
 				phone: payload.phone_number,
@@ -67,16 +64,17 @@ module.exports = {
 
 			model.set(user, (err, ret) => {
 				if (err) return next(err)
-				user.id = ret[0];
+				user.id = ret.insertId;
 				Object.assign(output, user)
 				return next()
 			})
 		})
 	},
 	getUser(jwt, output, next){
-		model.get(jwt.username, jwt.client_id, (err, ret) => {
+		model.get(jwt.username, (err, ret) => {
 			if (err) return next(err)
-			Object.assign(output, ret)
+			if (!ret || !ret.length) return next()
+			Object.assign(output, ret[0])
 			return next()
 		})
 	}

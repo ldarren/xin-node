@@ -4,13 +4,12 @@
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.438.0",
-    "emailjs-mime-parser": "^2.0.7",
+    "aws-sdk": "^2.441.0",
     "pem-jwk": "^2.0.0",
+    "pico-common": "^0.10.18",
     "pico-jwt": "^0.2.3",
-    "picos": "^0.7.1",
-    "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git#feature/transposer",
-    "text-encoding": "^0.7.0"
+    "picos": "^0.7.3",
+    "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git#feature/transposer"
   },
   "devDependencies": {},
   "scripts": {

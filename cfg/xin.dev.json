@@ -1,6 +1,7 @@
 {
     "app":{
-		"jwks": "jwks.jasa.json"
+		"jwks": "jwks.xin.json",
+		"clients": ["5uv9h54856vggs218vjtctqvs9"]
     },
 	"deps": ["xin.json"]
 }

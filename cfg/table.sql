@@ -93,8 +93,6 @@ CREATE TABLE IF NOT EXISTS `group_map` (
 	PRIMARY KEY(`host_id`, `k`)
 ) ENGINE=INNODB;
 
-INSERT INTO `group` (name) VALUES ('xin');
-INSERT INTO `group_map` 
 /*
 CREATE TABLE IF NOT EXISTS group_list (
     id INT UNSIGNED AUTO_INCREMENT,
