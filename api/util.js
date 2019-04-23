@@ -30,7 +30,7 @@ module.exports = {
 		return next()
 	},
 	extractParams(output, next){
-		Object.assign(output, this.params)	
+		Object.assign(output, this.params)
 		return next()
 	},
 	help(next){

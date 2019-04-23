@@ -6,7 +6,7 @@ module.exports = {
 	},
 	set(user, body, next){
 		const name = body.name
-		if (!name) return next('missing name')
+		if (!name) return next(this.error(400, 'missing name'))
 		group.set(name, user.id, body, [0, 1], (err, ret) => {
 			if (err) return next(err)
 			this.setOutput({id: ret.insertId})
@@ -16,14 +16,14 @@ module.exports = {
 	get(grp, next){
 		group.get(grp.name, (err, ret) => {
 			if (err) return next(err)
-			if (!ret || !ret.length) return next('not found')
+			if (!ret || !ret.length) return next(this.error(400, 'not found'))
 			Object.assign(grp, ret[0])
 			return next()
 		})
 	},
 	list(user, output, next){
 		group.list(user.id, (err, ret) => {
-			if (err) return next(err)
+			if (err) return next(this.error(400, err))
 			output.push(...ret)
 			return next()
 		})

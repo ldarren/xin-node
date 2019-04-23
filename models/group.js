@@ -2,7 +2,7 @@ let group
 
 function parse(ret){
 	return ret.map(row => {
-		if (row.env) row.env = JSON.parse(row.env)	
+		if (row.env) row.env = JSON.parse(row.env)
 		if (row.perm) row.perm = JSON.parse(row.perm)
 		return row
 	})

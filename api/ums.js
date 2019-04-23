@@ -32,11 +32,11 @@ module.exports = {
 	},
 	verify(req, output, next){
 		let token = req.headers['authorization']
-		if (!token || !token.length) return next({status: 403, code: 0})
+		if (!token || !token.length) return next(this.error(403))
 		token = token.substr('Bearer '.length)
 
 		const payload = getTokenPayload(token)
-		if (!payload) return next({status: 403, code: 1})
+		if (!payload) return next(this.error(403))
 
 		Object.assign(output, payload)
 
@@ -44,15 +44,15 @@ module.exports = {
 	},
 	setUser(jwt, body, output, next){
 		model.get(jwt.username, (err, ret) => {
-			if (err) return next(err)
+			if (err) return next(this.error(404, err))
 			if (ret, ret.length) {
 				Object.assign(output, ret[0])
 				return next()
 			}
 
 			const payload = getTokenPayload(body.token)
-			if (!payload) return next({status: 400, code: 0})
-			if (payload['cognito:username'] !== jwt.username) return next({status: 400, code: 1})
+			if (!payload) return next(this.error(400))
+			if (payload['cognito:username'] !== jwt.username) return next(this.error(400))
 
 			const user = {
 				username: jwt.username,
@@ -63,8 +63,8 @@ module.exports = {
 			}
 
 			model.set(user, (err, ret) => {
-				if (err) return next(err)
-				user.id = ret.insertId;
+				if (err) return next(this.error(400, err))
+				user.id = ret.insertId
 				Object.assign(output, user)
 				return next()
 			})
@@ -72,7 +72,7 @@ module.exports = {
 	},
 	getUser(jwt, output, next){
 		model.get(jwt.username, (err, ret) => {
-			if (err) return next(err)
+			if (err) return next(this.error(400, err))
 			if (!ret || !ret.length) return next()
 			Object.assign(output, ret[0])
 			return next()
