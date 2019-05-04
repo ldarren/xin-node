@@ -30,11 +30,18 @@ module.exports = {
 		jwts = createJWTs(jwks)
 		cb()
 	},
-	verify(req, output, next){
-		let token = req.headers['authorization']
+	extractToken(req, output, next){
+		const token = req.headers['authorization']
+console.log('token', token)
 		if (!token || !token.length) return next(this.error(403))
-		token = token.substr('Bearer '.length)
-
+		Object.assign(output, {
+			accessToken: token.substr('Bearer '.length)
+		})
+console.log('output', output)
+		return next()
+	},
+	verify(input, output, next){
+		const token = input.accessToken
 		const payload = getTokenPayload(token)
 		if (!payload) return next(this.error(403))
 
@@ -43,6 +50,10 @@ module.exports = {
 		return next()
 	},
 	setUser(jwt, body, output, next){
+		if ('xin.com' !== body.company) return (this.error(403))
+		Object.assign(output, {
+			accessToken: body.accessToken
+		})
 		model.get(jwt.username, (err, ret) => {
 			if (err) return next(this.error(404, err))
 			if (ret, ret.length) {
@@ -50,7 +61,7 @@ module.exports = {
 				return next()
 			}
 
-			const payload = getTokenPayload(body.token)
+			const payload = getTokenPayload(body.idToken)
 			if (!payload) return next(this.error(400))
 			if (payload['cognito:username'] !== jwt.username) return next(this.error(400))
 
