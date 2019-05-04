@@ -1,6 +1,7 @@
 .DS_Store
 cfg/jwks.*.json
 cfg/xin.json
+cfg/app.xin.env.json
 test/jwts.json
 
 # Logs

@@ -14,42 +14,55 @@
             []
         ],
 		"/s3/list":[
+			["ums", "extractToken", "req", "token"],
+			["ums", "verify", "token", "jwt"],
 			["s3", "list", "emails"],
 			["util", "output", "emails"],
 			[]
 		],
 		"/s3/read/:key":[
+			["ums", "extractToken", "req", "token"],
+			["ums", "verify", "token", "jwt"],
 			["s3", "read", "email"],
 			["util", "output", "email"],
 			[]
 		],
 		"/user/create": [
-			["ums", "verify", "req", "jwt"],
 			["web", "getBody", "req", "body"],
+			["ums", "verify", "body", "jwt"],
+			["util", ["validate", {
+				"idToken": {"type": "string", "required": 1},
+				"company": {"type": "string", "required": 1}
+			}], "body"],
 			["ums", "setUser", "jwt", "body", "output"],
 			["util", "output", "output"],
 			[]
 		],
 		"config/mailbox/create": [
+			["ums", "extractToken", "req", "token"],
+			["ums", "verify", "token", "jwt"],
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
-				"name": {"type": "string", "required": "true"},
-				"region": {"type": "string", "required": "true"},
-				"Bucket": {"type": "string", "required": "true"},
-				"IdentityPoolId": {"type": "string", "required": "true"},
-				"UserPoolId": {"type": "string", "required": "true"},
-				"ClientId": {"type": "string", "required": "true"}
+				"name": {"type": "string", "required": 1},
+				"region": {"type": "string", "required": 1},
+				"Bucket": {"type": "string", "required": 1},
+				"IdentityPoolId": {"type": "string", "required": 1},
+				"UserPoolId": {"type": "string", "required": 1},
+				"ClientId": {"type": "string", "required": 1}
 			}], "body"],
 			["config", "set", "user", "body"],
 			[]
 		],
 		"config/mailbox/list": [
+			["ums", "extractToken", "req", "token"],
+			["ums", "verify", "token", "jwt"],
 			["config", "list", "user", ":output"],
 			["util", "output", ":output"],
 			[]
 		],
 		"/config/mailbox": [
-			["ums", "verify", "req", "jwt"],
+			["ums", "extractToken", "req", "token"],
+			["ums", "verify", "token", "jwt"],
 			["ums", "getUser", "jwt", "user"],
 			["util", "branch", "req", {
 				"POST": "config/mailbox/create",
@@ -59,14 +72,10 @@
 		"/config/mailbox/:name": [
 			["util", "extractParams", "group"],
 			["util", ["validate", {
-				"name": {"type": "string", "required": true}
+				"name": {"type": "string", "required": 1}
 			}], "group"],
 			["config", "get", "group"],
 			["util", "output", "group"],
-			[]
-		],
-        "/say/hello":[
-            ["util", "sayNow"],
 			[]
         ]
     }
