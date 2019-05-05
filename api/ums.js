@@ -30,13 +30,17 @@ module.exports = {
 		jwts = createJWTs(jwks)
 		cb()
 	},
-	extractToken(req, output, next){
+	readHeaderAuth(req, output, next){
 		const token = req.headers['authorization']
 		if (!token || !token.length) return next(this.error(403))
 		Object.assign(output, {
 			accessToken: token.substr('Bearer '.length)
 		})
 		return next()
+	},
+	checkCompany(input, company, next){
+		if (input.company === company) return next()
+		return next(this.error(403, `only accept ${company} company`))
 	},
 	verify(input, output, next){
 		const token = input.accessToken
@@ -48,7 +52,6 @@ module.exports = {
 		return next()
 	},
 	setUser(jwt, body, output, next){
-		if ('xin.com' !== body.company) return (this.error(403))
 		Object.assign(output, {
 			accessToken: body.accessToken
 		})

@@ -14,14 +14,14 @@
             []
         ],
 		"/s3/list":[
-			["ums", "extractToken", "req", "token"],
+			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["s3", "list", "emails"],
 			["util", "output", "emails"],
 			[]
 		],
 		"/s3/read/:key":[
-			["ums", "extractToken", "req", "token"],
+			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["s3", "read", "email"],
 			["util", "output", "email"],
@@ -29,17 +29,19 @@
 		],
 		"/user/create": [
 			["web", "getBody", "req", "body"],
-			["ums", "verify", "body", "jwt"],
 			["util", ["validate", {
+				"accessToken": {"type": "string", "required": 1},
 				"idToken": {"type": "string", "required": 1},
 				"company": {"type": "string", "required": 1}
 			}], "body"],
+			["ums", "checkCompany", "body", "#xin.com"],
+			["ums", "verify", "body", "jwt"],
 			["ums", "setUser", "jwt", "body", "output"],
 			["util", "output", "output"],
 			[]
 		],
 		"config/mailbox/create": [
-			["ums", "extractToken", "req", "token"],
+			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
@@ -54,14 +56,14 @@
 			[]
 		],
 		"config/mailbox/list": [
-			["ums", "extractToken", "req", "token"],
+			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["config", "list", "user", ":output"],
 			["util", "output", ":output"],
 			[]
 		],
 		"/config/mailbox": [
-			["ums", "extractToken", "req", "token"],
+			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["ums", "getUser", "jwt", "user"],
 			["util", "branch", "req", {
