@@ -32,12 +32,10 @@ module.exports = {
 	},
 	extractToken(req, output, next){
 		const token = req.headers['authorization']
-console.log('token', token)
 		if (!token || !token.length) return next(this.error(403))
 		Object.assign(output, {
 			accessToken: token.substr('Bearer '.length)
 		})
-console.log('output', output)
 		return next()
 	},
 	verify(input, output, next){
