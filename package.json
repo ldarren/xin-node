@@ -4,12 +4,12 @@
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.449.0",
+    "aws-sdk": "^2.465.0",
     "pem-jwk": "^2.0.0",
-    "pico-common": "^0.10.21",
+    "pico-common": "^0.10.23",
     "pico-jwt": "^0.2.3",
     "picos": "^0.7.3",
-    "picos-mod-mysql": "^0.3.5"
+    "picos-mod-mysql": "^0.5.2"
   },
   "devDependencies": {},
   "scripts": {
