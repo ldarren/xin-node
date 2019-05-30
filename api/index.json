@@ -41,8 +41,6 @@
 			[]
 		],
 		"config/mailbox/create": [
-			["ums", "readHeaderAuth", "req", "token"],
-			["ums", "verify", "token", "jwt"],
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
 				"name": {"type": "string", "required": 1},
@@ -52,20 +50,47 @@
 				"UserPoolId": {"type": "string", "required": 1},
 				"ClientId": {"type": "string", "required": 1}
 			}], "body"],
-			["config", "set", "user", "body"],
+			["ums", "getUser", "jwt", "user"],
+			["config", "set", "user", "body", "group"],
+			["util", "output", "group"],
 			[]
 		],
 		"config/mailbox/list": [
-			["ums", "readHeaderAuth", "req", "token"],
-			["ums", "verify", "token", "jwt"],
 			["config", "list", "user", ":output"],
 			["util", "output", ":output"],
+			[]
+		],
+		"config/mailbox/update": [
+			["ums", "readHeaderAuth", "req", "token"],
+			["ums", "verify", "token", "jwt"],
+			["web", "getBody", "req", "body"],
+			["util", ["validate", {
+				"name": {"type": "string"},
+				"region": {"type": "string"},
+				"Bucket": {"type": "string"},
+				"IdentityPoolId": {"type": "string"},
+				"UserPoolId": {"type": "string"},
+				"ClientId": {"type": "string"}
+			}], "body"],
+			["config", "update", "group", "body", "result"],
+			["util", "output", "result"],
+			[]
+		],
+		"config/mailbox/detail": [
+			["config", "get", "group"],
+			["util", "output", "group"],
+			[]
+		],
+		"config/mailbox/delete": [
+			["ums", "readHeaderAuth", "req", "token"],
+			["ums", "verify", "token", "jwt"],
+			["config", "delete", "group", "result"],
+			["util", "output", "result"],
 			[]
 		],
 		"/config/mailbox": [
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
-			["ums", "getUser", "jwt", "user"],
 			["util", "branch", "req", {
 				"POST": "config/mailbox/create",
 				"GET": "config/mailbox/list"
@@ -76,9 +101,11 @@
 			["util", ["validate", {
 				"name": {"type": "string", "required": 1}
 			}], "group"],
-			["config", "get", "group"],
-			["util", "output", "group"],
-			[]
+			["util", "branch", "req", {
+				"PUT": "config/mailbox/update",
+				"GET": "config/mailbox/detail",
+				"DELETE": "config/mailbox/delete"
+			}]
         ]
     }
 }

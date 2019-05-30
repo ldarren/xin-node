@@ -3,7 +3,7 @@ let user
 module.exports = {
 	setup(ctx, cb){
 		const storage = ctx.storage
-		user = ctx.storage.t('user', storage.hash(), ['username', 'state'])
+		user = ctx.storage.t('user', storage.hash(), ['username'])
 		user().ready.on(err => {
 			if (err) return cb(err)
 			console.log('user table connected')
