@@ -40,6 +40,6 @@ module.exports = {
 		group().update(body).where({id}).exec(cb)
 	},
 	delete(id, cb){
-		group().delete().where({id}).exec(cb)
+		group().update({state:0}).where({id}).exec(cb)
 	}
 }
