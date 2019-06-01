@@ -54,14 +54,7 @@
 			["util", "output", "group"],
 			[]
 		],
-		"config/mailbox/list": [
-			["config", "list", "user", ":output"],
-			["util", "output", ":output"],
-			[]
-		],
 		"config/mailbox/update": [
-			["ums", "readHeaderAuth", "req", "token"],
-			["ums", "verify", "token", "jwt"],
 			["ums", "getUser", "jwt", "user"],
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
@@ -74,6 +67,11 @@
 			}], "body"],
 			["config", "update", "user", "group", "body", "result"],
 			["util", "output", "result"],
+			[]
+		],
+		"config/mailbox/list": [
+			["config", "list", "user", ":output"],
+			["util", "output", ":output"],
 			[]
 		],
 		"config/mailbox/detail": [
@@ -98,15 +96,25 @@
 				"GET": "config/mailbox/list"
 			}]
 		],
-		"/config/mailbox/:name": [
+		"/config/mailbox/name/:name": [
 			["util", "extractParams", "group"],
 			["util", ["validate", {
 				"name": {"type": "string", "required": 1}
 			}], "group"],
 			["util", "branch", "req", {
-				"PUT": "config/mailbox/update",
 				"GET": "config/mailbox/detail",
 				"DELETE": "config/mailbox/delete"
+			}]
+        ],
+		"/config/mailbox/:id": [
+			["util", "extractParams", "group"],
+			["util", ["validate", {
+				"id": {"type": "number", "required": 1}
+			}], "group"],
+			["ums", "readHeaderAuth", "req", "token"],
+			["ums", "verify", "token", "jwt"],
+			["util", "branch", "req", {
+				"PUT": "config/mailbox/update"
 			}]
         ]
     }

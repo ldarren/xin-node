@@ -37,7 +37,7 @@ module.exports = {
 		next(this.error(404, `api ${this.api} is not supported yet`))
 	},
 	say(msg, next){
-		console.log(msg); return next()
+		console.log(JSON.stringify(msg)); return next()
 	},
 	sayNow(next){
 		console.log(Date.now())
