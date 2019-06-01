@@ -36,10 +36,10 @@ module.exports = {
 			cb(null, parse(ret))
 		})
 	},
-	update(id, body, cb){
-		group().update(body).where({id}).exec(cb)
+	update(name, cby, body, cb){
+		group().update(body).where({name, cby}).exec(cb)
 	},
-	delete(id, cb){
-		group().update({state:0}).where({id}).exec(cb)
+	delete(name, cby, cb){
+		group().update({state:0}).where({name, cby}).exec(cb)
 	}
 }

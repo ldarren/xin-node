@@ -26,15 +26,15 @@ module.exports = {
 			return next()
 		})
 	},
-	update(group, body, output, next){
-		group.update(group.name, body, (err, ret) => {
+	update(user, group, body, output, next){
+		group.update(group.name, user.id, body, (err, ret) => {
 			if (err) return next(err)
 			Object.assign(output, ret);
 			return next()
 		})
 	},
-	delete(group, output, next){
-		group.delete(group.name, (err, ret) => {
+	delete(user, group, output, next){
+		group.delete(group.name, user.id, (err, ret) => {
 			if (err) return next(err)
 			Object.assign(output, ret)
 			return next()
