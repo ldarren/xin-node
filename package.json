@@ -1,15 +1,15 @@
 {
   "name": "xin-node",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.449.0",
+    "aws-sdk": "^2.466.0",
     "pem-jwk": "^2.0.0",
-    "pico-common": "^0.10.21",
+    "pico-common": "^0.10.24",
     "pico-jwt": "^0.2.3",
     "picos": "^0.7.3",
-    "picos-mod-mysql": "git+https://github.com/ldarren/picos-mod-mysql.git#feature/transposer"
+    "picos-mod-mysql": "^0.5.4"
   },
   "devDependencies": {},
   "scripts": {

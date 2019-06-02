@@ -1,4 +1,3 @@
-const pico = require('pico-common/bin/pico-cli')
 const pMysql = require('picos-mod-mysql')
 const group = require('../models/group.js')
 
@@ -10,7 +9,7 @@ const xinEnv = require('../cfg/app.xin.env.json')
 const xinPerm = [1, 0]
 
 pMysql.create(appConfig, mods.storage, (err, cli) => {
-	if (err) return cb(err)
+	if (err) return console.error(err)
 	group.setup({storage: cli}, () => {
 		group.get(xinKey, (err, ret) => {
 			if (err) return console.error(err)

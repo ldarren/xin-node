@@ -11,7 +11,7 @@ function parse(ret){
 module.exports = {
 	setup(ctx, cb){
 		const storage = ctx.storage
-		group = ctx.storage.t('group', storage.hash(), ['name', 'state', 'cby', 'uby'])
+		group = ctx.storage.t('group', storage.hash(), ['name'])
 		group().ready.on(err => {
 			if (err) return cb(err)
 			console.log('group table connected')
@@ -35,5 +35,11 @@ module.exports = {
 			if (err) return cb(err)
 			cb(null, parse(ret))
 		})
+	},
+	update(id, cby, body, cb){
+		group().update(body).where({id, cby}).exec(cb)
+	},
+	delete(name, cby, cb){
+		group().update({state:0}).where({name, cby}).exec(cb)
 	}
 }
