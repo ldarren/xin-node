@@ -33,8 +33,8 @@ module.exports = {
 			return next()
 		})
 	},
-	delete(user, grp, body, output, next){
-		group.delete(grp.id, user.id, body, (err, ret) => {
+	delete(user, grp, output, next){
+		group.delete(grp.name, user.id, (err, ret) => {
 			if (err) return next(err)
 			Object.assign(output, ret)
 			return next()
