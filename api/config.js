@@ -7,7 +7,7 @@ module.exports = {
 	set(user, body, output, next){
 		group.set(body.name, user.id, body, [0, 1], (err, ret) => {
 			if (err) return next(err)
-			Object.assign(output, {id: ret.insertId})
+			Object.assign(output, {id: ret.insertId, name:body.name})
 			return next()
 		})
 	},

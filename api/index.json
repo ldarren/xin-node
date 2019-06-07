@@ -51,6 +51,7 @@
 				"ClientId": {"type": "string", "required": 1}
 			}], "body"],
 			["config", "set", "user", "body", "group"],
+			["config", "get", "group"],
 			["util", "output", "group"],
 			[]
 		],
