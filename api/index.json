@@ -28,6 +28,7 @@
 			[]
 		],
 		"/user/create": [
+			["util", "filterMethod", "req", "res"],
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
 				"accessToken": {"type": "string", "required": 1},
@@ -81,6 +82,7 @@
 			[]
 		],
 		"config/mailbox/delete": [
+			["util", "filterMethod", "req", "res"],
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["ums", "getUser", "jwt", "user"],
@@ -89,6 +91,7 @@
 			[]
 		],
 		"/config/mailbox": [
+			["util", "filterMethod", "req", "res"],
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["ums", "getUser", "jwt", "user"],
@@ -102,6 +105,7 @@
 			["util", ["validate", {
 				"name": {"type": "string", "required": 1}
 			}], "group"],
+			["util", "filterMethod", "req", "res"],
 			["util", "branch", "req", {
 				"GET": "config/mailbox/detail",
 				"DELETE": "config/mailbox/delete"
@@ -112,6 +116,7 @@
 			["util", ["validate", {
 				"id": {"type": "number", "required": 1}
 			}], "group"],
+			["util", "filterMethod", "req", "res"],
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["util", "branch", "req", {

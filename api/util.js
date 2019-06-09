@@ -1,9 +1,23 @@
 const pObj = require('pico-common').export('pico/obj')
+const ACAH = 'Access-Control-Allow-Headers'
+const acrh = 'access-control-request-headers'
+const ACAM = 'Access-Control-Allow-Methods'
+const ALL_METHODS = 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
 
 module.exports = {
 	setup(ctx, cb){
 		//ctx.sigslot.signalAt('* * * * * *', 'sayNow')
 		cb()
+	},
+	filterMethod(req, res, next){
+		switch(req.method){
+		case 'OPTIONS':
+		case 'HEAD':
+			res.setHeader(ACAH, req.headers[acrh])
+			res.setHeader(ACAM, ALL_METHODS)
+			return next(null, this.sigslot.abort())
+		}
+		next()
 	},
 	route(req, next){
 		switch(req.method){
