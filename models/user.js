@@ -13,7 +13,7 @@ module.exports = {
 	set(obj, cb){
 		const input = Object.assign({}, obj, { state: 1 })
 		user()
-			.insert(['username', 'state', 'email', 'phone'])
+			.insert(['username', 'state'])
 			.values([input])
 			.exec(cb)
 	},

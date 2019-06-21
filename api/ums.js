@@ -68,10 +68,6 @@ module.exports = {
 
 			const user = {
 				username: jwt.username,
-				email: payload.email,
-				email_state: payload.email_verified ? 1 : 0,
-				phone: payload.phone_number,
-				phone_state: payload.phone_number_verified ? 1 : 0,
 			}
 
 			model.set(user, (err, ret) => {
