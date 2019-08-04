@@ -10,6 +10,8 @@ module.exports = {
 		cb()
 	},
 	filterMethod(req, res, next){
+		console.log(Date.now(), req.method, req.url, req.rawHeaders)
+
 		switch(req.method){
 		case 'OPTIONS':
 		case 'HEAD':
@@ -40,6 +42,7 @@ module.exports = {
 		}
 	},
 	output(body, next){
+		console.log(Date.now(), JSON.stringify(body))
 		this.setOutput(body)
 		return next()
 	},
