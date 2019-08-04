@@ -51,9 +51,9 @@
 				"UserPoolId": {"type": "string", "required": 1},
 				"ClientId": {"type": "string", "required": 1}
 			}], "body"],
-			["config", "set", "user", "body", "group"],
-			["config", "get", "group"],
-			["util", "output", "group"],
+			["config", "set", "user", "body", "company"],
+			["config", "get", "company"],
+			["util", "output", "company"],
 			[]
 		],
 		"config/mailbox/update": [
@@ -67,7 +67,7 @@
 				"UserPoolId": {"type": "string"},
 				"ClientId": {"type": "string"}
 			}], "body"],
-			["config", "update", "user", "group", "body", "result"],
+			["config", "update", "user", "company", "body", "result"],
 			["util", "output", "result"],
 			[]
 		],
@@ -77,8 +77,8 @@
 			[]
 		],
 		"config/mailbox/detail": [
-			["config", "get", "group"],
-			["util", "output", "group"],
+			["config", "get", "company"],
+			["util", "output", "company"],
 			[]
 		],
 		"config/mailbox/delete": [
@@ -86,7 +86,7 @@
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
 			["ums", "getUser", "jwt", "user"],
-			["config", "delete", "user", "group", "result"],
+			["config", "delete", "user", "company", "result"],
 			["util", "output", "result"],
 			[]
 		],
@@ -101,10 +101,10 @@
 			}]
 		],
 		"/config/mailbox/name/:name": [
-			["util", "extractParams", "group"],
+			["util", "extractParams", "company"],
 			["util", ["validate", {
 				"name": {"type": "string", "required": 1}
-			}], "group"],
+			}], "company"],
 			["util", "filterMethod", "req", "res"],
 			["util", "branch", "req", {
 				"GET": "config/mailbox/detail",
@@ -112,10 +112,10 @@
 			}]
         ],
 		"/config/mailbox/:id": [
-			["util", "extractParams", "group"],
+			["util", "extractParams", "company"],
 			["util", ["validate", {
 				"id": {"type": "number", "required": 1}
-			}], "group"],
+			}], "company"],
 			["util", "filterMethod", "req", "res"],
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
