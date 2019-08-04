@@ -1,5 +1,5 @@
--- to store xin group cognito and s3 info
--- ** group
+-- to store xin company cognito and s3 info
+-- ** company
 -- - name: "ur-company-name",
 -- - region: "ap-southeast-1",
 -- - Bucket": "email-bucket-name",
@@ -10,16 +10,16 @@
 -- ** insert hash
 -- insert into hash (v) values ('ClientId', 'UserPoolId')
 
--- ** insert group
--- insert into group (name) values ('yr-company-name')
--- insert into group_text_map (group_id, k, v) values (1, 'ClientId', 'xxxxxxxxxxxxxxxx'), (1, 'UserPoolId', 'ap-southeast-1_xxxxxxxxx'), (1, 'env', '{"":""}')
+-- ** insert company
+-- insert into company (name) values ('yr-company-name')
+-- insert into company_text_map (company_id, k, v) values (1, 'ClientId', 'xxxxxxxxxxxxxxxx'), (1, 'UserPoolId', 'ap-southeast-1_xxxxxxxxx'), (1, 'env', '{"":""}')
 
--- ** find group
--- select id from group where name = ?;
+-- ** find company
+-- select id from company where name = ?;
 -- ** verify
--- select count(*) from group_map where host_id = ? and k in ('ClientId', 'UserPoolId') and v2 in ('xxxxxxxxx', 'xxxxxx');
+-- select count(*) from company_map where host_id = ? and k in ('ClientId', 'UserPoolId') and v2 in ('xxxxxxxxx', 'xxxxxx');
 -- ** get
--- select v2 from group_map where host_id = ? and k = 'env';
+-- select v2 from company_map where host_id = ? and k = 'env';
 
 DROP TABLE IF EXISTS `hash`;
 CREATE TABLE IF NOT EXISTS `hash` (
@@ -33,10 +33,8 @@ CREATE TABLE IF NOT EXISTS `hash` (
 
 INSERT INTO `hash` (v) VALUES
 ('user'),
-('group'),
+('company'),
 ('username'),
-('email'),
-('phone'),
 ('name'),
 ('env'),
 ('perm');
@@ -67,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `user_map` (
     PRIMARY KEY (`host_id`, `k`)
 ) ENGINE=INNODB;
 
-DROP TABLE IF EXISTS `group`;
-CREATE TABLE IF NOT EXISTS `group` (
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE IF NOT EXISTS `company` (
     `id` SERIAL,
     `name` VARCHAR(64) UNIQUE NOT NULL,
 	`state` TINYINT UNSIGNED DEFAULT 1,
@@ -79,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `group` (
     PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
-DROP TABLE IF EXISTS `group_map`;
-CREATE TABLE IF NOT EXISTS `group_map` (
+DROP TABLE IF EXISTS `company_map`;
+CREATE TABLE IF NOT EXISTS `company_map` (
 	`host_id` BIGINT UNSIGNED,
 	`k` BIGINT UNSIGNED NOT NULL,
 	`v1` INT,
@@ -94,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `group_map` (
 ) ENGINE=INNODB;
 
 /*
-CREATE TABLE IF NOT EXISTS group_list (
+CREATE TABLE IF NOT EXISTS company_list (
     id INT UNSIGNED AUTO_INCREMENT,
 	host_id INT UNSIGNED,
 	k SMALLINT UNSIGNED NOT NULL,
@@ -107,7 +105,7 @@ CREATE TABLE IF NOT EXISTS group_list (
     PRIMARY KEY (id)
 ) ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS group_ref (
+CREATE TABLE IF NOT EXISTS company_ref (
     id INT UNSIGNED AUTO_INCREMENT,
 	host_id INT UNSIGNED,
 	ref_id INT UNSIGNED,
