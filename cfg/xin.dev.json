@@ -1,7 +1,7 @@
 {
     "app":{
-		"jwks": "jwks.jasa.json",
-		"clients": ["5uv9h54856vggs218vjtctqvs9"]
+		"jwks": "jwks.kloudkonsole.json",
+		"clients": ["b7e6ipol86i9tlcjhthr0b8e5"]
     },
 	"deps": ["xin.json"]
 }

@@ -28,6 +28,7 @@
 			[]
 		],
 		"/user/create": [
+			["util", "logReq", "req", "log"],
 			["util", "filterMethod", "req", "res"],
 			["web", "getBody", "req", "body"],
 			["util", ["validate", {
@@ -35,10 +36,11 @@
 				"idToken": {"type": "string", "required": 1},
 				"company": {"type": "string", "required": 1}
 			}], "body"],
-			["ums", "checkCompany", "body", "#xin.com"],
+			["ums", "checkCompany", "body", "#kloudkonsole"],
 			["ums", "verify", "body", "jwt"],
 			["ums", "setUser", "jwt", "body", "output"],
 			["util", "output", "output"],
+			["util", "logRes", "res", "log", "output"],
 			[]
 		],
 		"config/mailbox/create": [
@@ -54,6 +56,7 @@
 			["config", "set", "user", "body", "company"],
 			["config", "get", "company"],
 			["util", "output", "company"],
+			["util", "logRes", "res", "log", "company"],
 			[]
 		],
 		"config/mailbox/update": [
@@ -69,16 +72,19 @@
 			}], "body"],
 			["config", "update", "user", "company", "body", "result"],
 			["util", "output", "result"],
+			["util", "logRes", "res", "log", "result"],
 			[]
 		],
 		"config/mailbox/list": [
 			["config", "list", "user", ":output"],
 			["util", "output", ":output"],
+			["util", "logRes", "res", "log", ":output"],
 			[]
 		],
 		"config/mailbox/detail": [
 			["config", "get", "company"],
 			["util", "output", "company"],
+			["util", "logRes", "res", "log", "company"],
 			[]
 		],
 		"config/mailbox/delete": [
@@ -88,9 +94,11 @@
 			["ums", "getUser", "jwt", "user"],
 			["config", "delete", "user", "company", "result"],
 			["util", "output", "result"],
+			["util", "logRes", "res", "log", "result"],
 			[]
 		],
 		"/config/mailbox": [
+			["util", "logReq", "req", "log"],
 			["util", "filterMethod", "req", "res"],
 			["ums", "readHeaderAuth", "req", "token"],
 			["ums", "verify", "token", "jwt"],
@@ -101,6 +109,7 @@
 			}]
 		],
 		"/config/mailbox/name/:name": [
+			["util", "logReq", "req", "log"],
 			["util", "extractParams", "company"],
 			["util", ["validate", {
 				"name": {"type": "string", "required": 1}
@@ -112,6 +121,7 @@
 			}]
         ],
 		"/config/mailbox/:id": [
+			["util", "logReq", "req", "log"],
 			["util", "extractParams", "company"],
 			["util", ["validate", {
 				"id": {"type": "number", "required": 1}

@@ -9,9 +9,31 @@ module.exports = {
 		//ctx.sigslot.signalAt('* * * * * *', 'sayNow')
 		cb()
 	},
-	filterMethod(req, res, next){
-		console.log(Date.now(), req.method, req.url, req.rawHeaders)
+	logRes(req, log, next){
+		log.id = pStr.rand()
+		log.now = Date.now()
+		console.log(JSON.stringify({
+			i: log.id,
+			t: log.now,
+			a: req.method,
+			u: req.url,
+			h: req.rawHeaders
+		}))
 
+		next()
+	},
+	logRes(res, log, output, next){
+		console.log(JSON.stringify({
+			i: log.id,
+			e: Date.now() - log.now,
+			s: res.statusCode,
+			m: res.statusMessage,
+			o: output
+		}))
+		
+		next()
+	},
+	filterMethod(req, res, next){
 		switch(req.method){
 		case 'OPTIONS':
 		case 'HEAD':
@@ -42,7 +64,6 @@ module.exports = {
 		}
 	},
 	output(body, next){
-		console.log(Date.now(), JSON.stringify(body))
 		this.setOutput(body)
 		return next()
 	},

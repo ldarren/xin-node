@@ -1,4 +1,4 @@
--- to store xin company cognito and s3 info
+-- to store kloudkonsole company cognito and s3 info
 -- ** company
 -- - name: "ur-company-name",
 -- - region: "ap-southeast-1",
