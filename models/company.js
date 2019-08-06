@@ -1,5 +1,5 @@
 let company1, company2
-const dummyCB = err => console.error(err)
+const dummyCB = err => (err ? console.error(err) : null)
 
 function parse(ret){
 	return ret.map(row => {

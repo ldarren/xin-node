@@ -1,5 +1,5 @@
 let user1, user2
-const dummyCB = err => console.error(err)
+const dummyCB = err => (err ? console.error(err) : null)
 
 module.exports = {
 	setup(ctx, cb){
