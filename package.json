@@ -1,6 +1,6 @@
 {
   "name": "xin-node",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
