@@ -1,7 +1,6 @@
 {
     "app":{
-		"jwks": "jwks.kloudkonsole.json",
-		"clients": ["b7e6ipol86i9tlcjhthr0b8e5"]
+		"jwks": "jwks.kloudkonsole.json"
     },
 	"deps": ["xin.json"]
 }
