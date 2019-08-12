@@ -1,4 +1,5 @@
 const pObj = require('pico-common').export('pico/obj')
+const pStr = require('pico-common').export('pico/str')
 const ACAH = 'Access-Control-Allow-Headers'
 const acrh = 'access-control-request-headers'
 const ACAM = 'Access-Control-Allow-Methods'
@@ -8,6 +9,30 @@ module.exports = {
 	setup(ctx, cb){
 		//ctx.sigslot.signalAt('* * * * * *', 'sayNow')
 		cb()
+	},
+	logReq(req, log, next){
+		log.id = pStr.rand()
+		log.now = Date.now()
+		console.log(JSON.stringify({
+			i: log.id,
+			t: log.now,
+			a: req.method,
+			u: req.url,
+			h: req.rawHeaders
+		}))
+
+		next()
+	},
+	logRes(res, log, output, next){
+		console.log(JSON.stringify({
+			i: log.id,
+			e: Date.now() - log.now,
+			s: res.statusCode,
+			m: res.statusMessage,
+			o: output
+		}))
+
+		next()
 	},
 	filterMethod(req, res, next){
 		switch(req.method){

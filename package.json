@@ -1,12 +1,12 @@
 {
   "name": "xin-node",
-  "version": "0.2.8",
+  "version": "1.0.0",
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.466.0",
+    "aws-sdk": "^2.503.0",
     "pem-jwk": "^2.0.0",
-    "pico-common": "^0.10.24",
+    "pico-common": "^0.10.27",
     "pico-jwt": "^0.2.3",
     "picos": "^0.7.3",
     "picos-mod-mysql": "^0.5.4"
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "picos -p cfg/xin.dev.json",
     "test": "DEBUG=1 node test/index.js",
-    "migrate": "XIN_CFG=xin.json node deploy/group.js",
+    "migrate": "XIN_CFG=xin.json node deploy/company.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

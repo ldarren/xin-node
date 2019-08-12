@@ -1,40 +1,40 @@
-const group = require('../models/group')
+const company = require('../models/company')
 
 module.exports = {
 	setup(ctx, cb){
 		return cb()
 	},
 	set(user, body, output, next){
-		group.set(body.name, user.id, body, [0, 1], (err, ret) => {
+		company.set(body.name, user.id, body, [0, 1], (err, ret) => {
 			if (err) return next(err)
 			Object.assign(output, {id: ret.insertId, name:body.name})
 			return next()
 		})
 	},
-	get(grp, next){
-		group.get(grp.name, (err, ret) => {
+	get(com, next){
+		company.get(com.name, (err, ret) => {
 			if (err) return next(err)
 			if (!ret || !ret.length) return next(this.error(400, 'not found'))
-			Object.assign(grp, ret[0])
+			Object.assign(com, ret[0])
 			return next()
 		})
 	},
 	list(user, output, next){
-		group.list(user.id, (err, ret) => {
+		company.list(user.id, (err, ret) => {
 			if (err) return next(this.error(400, err))
 			output.push(...ret)
 			return next()
 		})
 	},
-	update(user, grp, body, output, next){
-		group.update(grp.id, user.id, {env: JSON.stringify(body)}, (err, ret) => {
+	update(user, com, body, output, next){
+		company.update(com.id, user.id, {env: JSON.stringify(body)}, (err, ret) => {
 			if (err) return next(err)
 			Object.assign(output, ret)
 			return next()
 		})
 	},
-	delete(user, grp, output, next){
-		group.delete(grp.name, user.id, (err, ret) => {
+	delete(user, com, output, next){
+		company.delete(com.name, user.id, (err, ret) => {
 			if (err) return next(err)
 			Object.assign(output, ret)
 			return next()
