@@ -11,6 +11,7 @@ npm ci
 to install the dependencies
 
 xin service has following main dependencies
+- pico-api
 - mysql database
 - AWS cognito service
 
