@@ -31,7 +31,7 @@ module.exports = {
 			m: res.statusMessage,
 			o: output
 		}))
-		
+
 		next()
 	},
 	filterMethod(req, res, next){
