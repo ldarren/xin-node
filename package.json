@@ -4,7 +4,7 @@
   "description": "xin api service",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.503.0",
+    "aws-sdk": "^2.814.0",
     "pem-jwk": "^2.0.0",
     "pico-common": "^0.10.27",
     "pico-jwt": "^0.2.3",
